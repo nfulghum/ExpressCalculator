@@ -3,18 +3,27 @@ const ExpressError = require('./expressError');
 
 const app = express();
 
-const { findMode, findMean, findMedian } = require('/.functions');
+const { findMode, findMean, findMedian, convertAndValidateNumsArray } = require('./functions');
 
 app.get("/mean", (req, res, next) => {
     try {
         if (!req.query.nums) {
             throw new ExpressError('You must pass a list of numbers seperated by commas', 400)
         }
+        let numsAsStrings = req.query.nums.split(',');
+        // check if anything bad was put in
+        let nums = convertAndValidateNumsArray(numsAsStrings);
+        if (nums instanceof Error) {
+            throw new ExpressError(nums.message);
+        }
+
         let result = {
             operation: "mean",
             result: findMean(nums)
         }
+
         return res.send(result);
+
     } catch (e) {
         next(e)
     }
@@ -25,11 +34,20 @@ app.get("/median", (req, res, next) => {
         if (!req.query.nums) {
             throw new ExpressError('You must pass a list of numbers seperated by commas', 400)
         }
+        let numsAsStrings = req.query.nums.split(',');
+        // check if anything bad was put in
+        let nums = convertAndValidateNumsArray(numsAsStrings);
+        if (nums instanceof Error) {
+            throw new ExpressError(nums.message);
+        }
+
         let result = {
             operation: "median",
             result: findMedian(nums)
         }
+
         return res.send(result);
+
     } catch (e) {
         next(e)
     }
@@ -40,11 +58,20 @@ app.get("/mode", (req, res, next) => {
         if (!req.query.nums) {
             throw new ExpressError('You must pass a list of numbers seperated by commas', 400)
         }
+        let numsAsStrings = req.query.nums.split(',');
+        // check if anything bad was put in
+        let nums = convertAndValidateNumsArray(numsAsStrings);
+        if (nums instanceof Error) {
+            throw new ExpressError(nums.message);
+        }
+
         let result = {
             operation: "mode",
             result: findMode(arr)
         }
+
         return res.send(result);
+
     } catch (e) {
         next(e)
     }
