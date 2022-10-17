@@ -1,0 +1,23 @@
+{
+  "name": "expresscalculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "calculator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfulghum/ExpressCalculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nfulghum/ExpressCalculator/issues"
+  },
+  "homepage": "https://github.com/nfulghum/ExpressCalculator#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
